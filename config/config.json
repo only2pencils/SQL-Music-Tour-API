@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": VV0nd3rvv3iss3,
+    "database": "music_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": VV0nd3rvv3iss3,
+    "database": "music_db_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": VV0nd3rvv3iss3,
+    "database": "music_db_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
