@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const stages = require("express").Router();
-const db = require("../stages");
-const { Band } = db;
+const db = require("../models");
+const { Stage } = db;
 const { Op } = require("sequelize");
 
 // INDEX ROUTE //
@@ -9,9 +9,8 @@ const { Op } = require("sequelize");
 stages.get("/", async (req, res) => {
   try {
     const foundStages = await stages.findAll({
-      order: [["available_start_time"]],
       where: {
-        name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
+        stage_name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
       },
     });
     res.status(200).json(foundStages);
@@ -23,10 +22,10 @@ stages.get("/", async (req, res) => {
 // FIND A SPECIFIC STAGE
 stages.get("/:id", async (req, res) => {
   try {
-    const foundBand = await stages.findOne({
+    const foundStage = await Stage.findOne({
       where: { stage_id: req.params.id },
     });
-    res.status(200).json(foundBand);
+    res.status(200).json(foundStage);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -34,7 +33,7 @@ stages.get("/:id", async (req, res) => {
 // CREATE ROUTE //
 stages.post("/", async (req, res) => {
   try {
-    const newStage = await stage.create(req.body);
+    const newStage = await Stage.create(req.body);
     res.status(200).json({
       message: "New stage successfully inserted",
       data: newStage,
@@ -46,7 +45,7 @@ stages.post("/", async (req, res) => {
 // UPDATE ROUTE //
 stages.put("/:id", async (req, res) => {
   try {
-    const updatedStages = await stage.update(req.body, {
+    const updatedStages = await Stage.update(req.body, {
       where: {
         stage_id: req.params.id,
       },
@@ -61,7 +60,7 @@ stages.put("/:id", async (req, res) => {
 // DELETE ROUTE //
 stages.delete("/:id", async (req, res) => {
   try {
-    const deleteStages = await Stage.destroy({
+    const deletedStages = await Stage.destroy({
       where: {
         stage_id: req.params.id,
       },
@@ -75,3 +74,5 @@ stages.delete("/:id", async (req, res) => {
 });
 // EXPORT //
 module.exports = stages;
+
+//  *DO NOT FORGET TO UPDATE MODELS FILE*  //
