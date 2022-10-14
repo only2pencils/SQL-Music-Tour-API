@@ -1,4 +1,7 @@
 // DEPENDECIES
+const events = require('express').Router()
+const db = require('../events')
+const { Event } = db
 const { Op } = require("sequelize");
 
 // INDEX ROUTE //
